@@ -1,0 +1,19 @@
+# Test container Docker Compose file
+# To execute this docker compose yml file use `docker compose -f docker-compose-test.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker compose -f docker-compose-test.yml down`
+
+services:
+  selenium-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: selenium-test
+    # Connect to the same network as the selenium grid
+    network_mode: "host"
+    environment:
+      - SELENIUM_HUB_URL=http://localhost:4444/wd/hub
+    command: >
+      bash -c "while true; do
+        sleep 1
+      done"
