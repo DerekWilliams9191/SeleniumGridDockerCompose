@@ -8,7 +8,7 @@ from selenium.webdriver import (ChromeOptions,
 
 # Get Selenium Grid URL from environment variable
 # Use 'http://selenium-hub:4444/wd/hub' as default value
-selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://selenium-hub:4444/wd/hub')
+selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://localhost:4444/wd/hub')
 
 def get_webdriver(browser='chrome'):
     """Create and return a new WebDriver instance connected to Selenium Grid."""
