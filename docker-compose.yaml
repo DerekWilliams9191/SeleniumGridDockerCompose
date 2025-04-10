@@ -6,7 +6,6 @@
 services:
   selenium-test:
     build:
-      context: .
       dockerfile: Dockerfile
     container_name: selenium-test
     # Connect to the same network as the selenium grid

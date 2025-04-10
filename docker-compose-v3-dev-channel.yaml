@@ -1,30 +1,46 @@
 # To execute this docker compose yml file use `docker compose -f docker-compose-v3-dev-channel.yml up`
 # Add the `-d` flag at the end for detached execution
 # To stop the execution, hit Ctrl+C, and then `docker compose -f docker-compose-v3-dev-channel.yml down`
+
 services:
   chrome:
-    image: selenium/node-chrome:dev
-    shm_size: 2gb
+    image: selenium/node-chrome:latest
+    shm_size: 6gb
     depends_on:
       - selenium-hub
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=4
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_SESSION_TIMEOUT=1800 # Measures inactivity on the driver
+    ports:
+      - "7900:7900" # VNC port
+  
+  firefox:
+    image: selenium/node-firefox:latest
+    shm_size: 6gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=4
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_SESSION_TIMEOUT=1800 # Measures inactivity on the driver
+    ports:
+      - "7901:7900" # VNC port
 
   edge:
-    image: selenium/node-edge:dev
-    shm_size: 2gb
+    image: selenium/node-edge:latest
+    shm_size: 6gb
     depends_on:
       - selenium-hub
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
-
-  firefox:
-    image: selenium/node-firefox:dev
-    shm_size: 2gb
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=4
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_SESSION_TIMEOUT=1800 # Measures inactivity on the driver
+    ports:
+      - "7902:7900" # VNC port
 
   selenium-hub:
     image: selenium/hub:latest
@@ -33,3 +49,5 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    environment:
+      - SE_GRID_MAX_SESSION=12
