@@ -1,25 +1,35 @@
 # SeleniumGridDockerCompose
 
 
-### Getting Started
+## Getting Started
 Starting grid server
 ```
 docker compose -f docker-compose-v3-dev-channel.yaml up
 ```
 
-### How To See Inside (Debug)
-#### Accessing Selenium Grid Webpage
+## How To See Inside (Debug)
+### Accessing Selenium Grid Webpage
 ```
-http://localhost:4444/ui/#
+http://localhost:4444/ui/
 ```
 
-#### Accessing the VNC
-The vnc is what allows you to see the browser live, Selenium grid uses noVNC so you can view everything in the broswer.
+___
 
-If you would like to access it through a tradtioanl VNC client, you can access with the following. Change the port as needed.
+### Accessing the VNC
+The VNC allows you to see the browser live
+
+#### Traditional VNC
+If you would like to access it through a traditional VNC client, you can access with the following.
+<br>
+*Change the port as needed.*
 ```
 127.0.0.1:7900
 ```
+
+___
+
+#### Web-based VNC
+Selenium grid uses noVNC so you can view everything in the broswer.
 
 Chrome (port 7900)
 ```
