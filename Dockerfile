@@ -27,15 +27,9 @@ USER docker
 RUN python3 -m venv /home/docker/venv
 ENV PATH="/home/docker/venv/bin:$PATH"
 
-# Install necessary packages in the virtual environment
+# Install python package
 RUN python3 -m pip install selenium
 
+# Copy code into container
 WORKDIR /home/docker/
-
 COPY . /home/docker/
-
-# Make sure we're using bash
-SHELL ["/bin/bash", "-c"]
-
-# Set default command to use bash with sourced environment
-CMD ["/bin/bash", "-c", "source /home/docker/venv/bin/activate && /bin/bash"]
