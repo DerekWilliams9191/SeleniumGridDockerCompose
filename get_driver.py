@@ -2,9 +2,11 @@ import os
 import time
 import logging
 from selenium import webdriver
-from selenium.webdriver.chrome.options import ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver import (ChromeOptions,
+                                FirefoxOptions,
+                                EdgeOptions
+                                )
+
 
 # Get Selenium Grid URL from environment variable
 # Use 'http://selenium-hub:4444/wd/hub' as default value
@@ -18,16 +20,18 @@ def get_webdriver(browser='chrome'):
     if browser == 'chrome': 
         options = ChromeOptions()
         # If you add headless, you cannot see the browser in the VNC
-        options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--enable-automation")
+        options.add_argument("--window-size=1920,1080")
     elif browser == 'firefox':
         options = FirefoxOptions()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--width=1920")
+        options.add_argument("--height=1080")
     elif browser == 'edge':
         options = EdgeOptions()
-        options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--enable-automation")
+        options.add_argument("--window-size=1920,1080")
     else:
         raise ValueError("Invalid broswer type")
     
